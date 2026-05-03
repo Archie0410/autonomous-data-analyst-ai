@@ -1,0 +1,40 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: aida-backend
+    ports:
+      - "8000:8000"
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+      OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
+      APP_ENV: production
+      LOG_LEVEL: INFO
+      DATABASE_URL: sqlite:////app/data/db/analyst.db
+      UPLOAD_DIR: /app/data/uploads
+      VECTOR_STORE_DIR: /app/data/vector_store
+      CORS_ORIGINS: http://localhost:5173,http://localhost
+    volumes:
+      - backend-data:/app/data
+      - backend-logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: aida-frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "5173:80"
+
+volumes:
+  backend-data:
+  backend-logs:

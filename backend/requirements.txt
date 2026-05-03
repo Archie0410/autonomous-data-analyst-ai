@@ -1,0 +1,31 @@
+# Core web framework
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+
+# Data + DB
+pandas==2.2.3
+numpy>=1.26,<2.0
+SQLAlchemy==2.0.36
+
+# AI / LLM
+openai==1.59.6
+langchain==0.3.14
+langchain-openai==0.2.14
+langgraph==0.2.62
+tiktoken==0.8.0
+
+# Vector store / embeddings
+faiss-cpu==1.9.0.post1
+
+# Charting (server-side spec generation)
+plotly==5.24.1
+
+# Config + logging
+pydantic==2.10.4
+pydantic-settings==2.7.1
+python-dotenv==1.0.1
+loguru==0.7.3
+
+# Safety / sandbox
+RestrictedPython==8.0

@@ -265,6 +265,4 @@ SQL/Python tool guardrails. They do **not** require an OpenAI key.
 
 ---
 
-## License
 
-MIT — do whatever you want, no warranty.
